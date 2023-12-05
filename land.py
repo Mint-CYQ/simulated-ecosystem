@@ -29,8 +29,30 @@ class Land:
                 self.qualt_H2O = 0.6
                 self.qualt_resc = 0.1
                 self.qualt_metbls = 0.3
-        self.orig_soil_H2O = self.qualt_H2O * 10 #初始土壤水
-        self.orig_soil_C = self.qualt_resc * 10 #初始土壤碳
-        self.orig_plant_C = self.qualt_resc * 5 #初始植物碳
-        self.prodc_rate = self.qualt_resc * self.qualt_H2O * 1 #光合作用生产有机物速率
-        self.respr_rate = self.qualt_metbls * 0.5 #呼吸作用消耗有机物速率
+        ###水循环部分
+        self.orig_soil_H2O = self.qualt_H2O * 10 #初始土壤水，标准为10
+        self.evapo_rate = self.orig_soil_H2O * 0.1 #蒸发速率，为0.1倍水量
+        self.flow_rate = 0.5 * self.orig_soil_H2O * 0.1 #径流速率，为概率0.5的0.1倍水量
+        self.rain_rate = 1 #如有降雨则降雨速率为1
+        ###碳循环部分
+        self.orig_plant_C = self.qualt_resc * 10 #初始植物碳，标准为10
+        self.prodc_rate = self.qualt_resc * self.qualt_H2O * 1 #光合作用生产植物有机物速率，标准为1
+        self.respr_rate = self.qualt_metbls * 0.5 #呼吸作用消耗植物有机物速率，标准为0.5
+        self.fallin_rate = 0.5 * self.qualt_metbls * 0.1 #死亡/掉落消耗植物有机物速率，标准的0.5概率的0.1
+        self.orig_soil_C = self.qualt_resc * 10 #初始土壤碳，标准为10
+        self.decom_rate = self.qualt_metbls * 0.1 #分解作用消耗土壤有机物速率，标准为0.1
+        
+class air:
+    def __init__(self):
+        self.orig_air_H2O = 1000 #初始大气水
+        self.orig_air_C = 1000 #初始大气碳
+        #水汽输送（水量补充）速率
+
+#径流函数
+#降水函数
+#蒸发作用函数
+
+#光合作用函数（植物&大气
+#呼吸作用函数（植物&大气
+#死亡掉落函数（植物&土壤
+#分解作用函数（土壤&大气
